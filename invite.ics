@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Jeenel and Jumarie//Gender Reveal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:gender-reveal-20261212@jeenel-jumarie
+DTSTAMP:20261123T000000Z
+DTSTART:20261212T090000Z
+DTEND:20261212T120000Z
+SUMMARY:Gender Reveal – Jeenel & Jumarie
+LOCATION:Provenciano\, Capiz Room\, 110 Maginhawa St.\, Diliman\, Quezon City
+DESCRIPTION:Join Jeenel & Jumarie for a Gender Reveal. Kindly RSVP by December 5.
+END:VEVENT
+END:VCALENDAR

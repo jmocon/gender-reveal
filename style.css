@@ -1,0 +1,214 @@
+:root {
+  --page: #EFE6D6;
+  --paper: #FBF6EC;
+  --ink: #5E5630;
+  --script: #7B4F2C;
+  --line: #E3D6C0;
+  --btn: #7B4F2C;
+  --btn-hover: #5F3C20;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px;
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 720px;
+  background: var(--paper);
+  border-radius: 6px;
+  box-shadow: 0 24px 60px -32px rgba(94, 86, 48, 0.45);
+  container-type: inline-size;
+}
+
+/* Corner decorations — sized as a share of the card, like the 1080px design */
+.deco { position: absolute; pointer-events: none; height: auto; }
+.leaves { width: 31.5cqw; top: -2.8cqw; opacity: 0.85; }
+.leaves-left { left: -2.8cqw; }
+.leaves-right { right: -2.8cqw; transform: scaleX(-1); }
+.balloons { width: 24cqw; bottom: -3.7cqw; }
+.balloons-left { left: -4.6cqw; }
+.balloons-right { right: -4.6cqw; transform: scaleX(-1); }
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(22px, 5.5cqw, 44px);
+  padding: 14cqw 15cqw 12cqw;
+  text-align: center;
+}
+
+p { margin: 0; }
+
+.title { display: flex; flex-direction: column; align-items: center; }
+.intro {
+  font-size: clamp(22px, 5.4cqw, 40px);
+  font-weight: 600;
+  line-height: 1.15;
+}
+h1 {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(56px, 14.8cqw, 108px);
+  line-height: 1.1;
+  color: var(--script);
+  white-space: nowrap;
+}
+
+.clothes { width: min(100%, 48cqw); min-width: 220px; height: auto; }
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: clamp(20px, 4.3cqw, 31px);
+  line-height: 1.25;
+}
+.details .address { font-size: clamp(17px, 3.5cqw, 26px); font-weight: 500; }
+
+.countdown {
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(17px, 3.2cqw, 23px);
+  color: var(--script);
+  min-height: 1.3em;
+}
+.countdown:empty { display: none; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--btn);
+  border-radius: 999px;
+  color: var(--btn);
+  background: transparent;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+.btn:hover { background: var(--btn); color: var(--paper); }
+.btn.primary { background: var(--btn); color: var(--paper); }
+.btn.primary:hover { background: var(--btn-hover); border-color: var(--btn-hover); }
+.btn:focus-visible { outline: 3px solid #C9AE8E; outline-offset: 3px; }
+
+.rsvp { display: flex; flex-direction: column; align-items: center; }
+.rsvp-script {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(36px, 7.8cqw, 58px);
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--script);
+}
+.rsvp p:last-child { font-size: clamp(19px, 3.2cqw, 24px); }
+
+/* ---------- Animation ---------- */
+
+/* Content fades up, one piece after another */
+.content > * {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.title .intro, .title h1 { opacity: 0; animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.content > .title { opacity: 1; animation: none; }
+.title .intro { animation-delay: 0.15s; }
+.title h1 { animation-name: write-in; animation-duration: 1.4s; animation-delay: 0.4s; }
+.content > .clothes { animation-delay: 0.9s; }
+.content > .details { animation-delay: 1.15s; }
+.content > .countdown { animation-delay: 1.35s; }
+.content > .actions { animation-delay: 1.5s; }
+.content > .rsvp { animation-delay: 1.7s; }
+
+@keyframes rise {
+  from { opacity: 0; translate: 0 18px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+/* The script title "writes" itself in, left to right */
+@keyframes write-in {
+  from { opacity: 1; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 -10% 0 -10%); }
+}
+
+/* Baby clothes swing gently from the rod */
+.garment {
+  transform-box: view-box;
+  animation: swing 3.6s ease-in-out infinite;
+}
+.garment-girl { transform-origin: 178px 36px; animation-delay: 1.2s; }
+.garment-boy  { transform-origin: 358px 36px; animation-duration: 4.2s; animation-delay: 1.5s; }
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(3.5deg); }
+  75%      { transform: rotate(-3.5deg); }
+}
+
+/* Pampas leaves sway from the corners */
+.leaves { animation: sway 6s ease-in-out infinite; }
+.leaves-left  { transform-origin: top left; --sway: 2.5deg; }
+.leaves-right { transform-origin: top right; --sway: -2.5deg; animation-delay: -3s; }
+
+@keyframes sway {
+  0%, 100% { rotate: 0deg; }
+  50%      { rotate: var(--sway); }
+}
+
+/* Balloons bob up and down */
+.balloons {
+  transform-origin: 50% 100%;
+  animation: float 5s ease-in-out infinite;
+}
+.balloons-right { animation-duration: 5.8s; animation-delay: -2s; }
+
+@keyframes float {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  50%      { translate: 0 -3.5cqw; rotate: 1.5deg; }
+}
+
+/* Countdown text pops in once the script fills it */
+.countdown { transition: opacity 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .content > *, .title .intro, .title h1 { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  body { padding: 16px; }
+  .content { padding: 22cqw 9cqw 26cqw; }
+  .leaves { width: 40cqw; }
+  .balloons { width: 26cqw; }
+}
