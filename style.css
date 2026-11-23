@@ -13,10 +13,7 @@ html, body { margin: 0; }
 
 body {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 32px 16px;
+  padding: 16px;
   background: var(--page);
   color: var(--ink);
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -24,15 +21,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* The card is laid out at one fixed size, like a printed invitation.
+   script.js scales it to fit the screen so the page never scrolls. */
 .card {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  max-width: 680px;
+  width: 440px;
+  margin: 0 auto;
   background: var(--paper);
   border-radius: 6px;
   box-shadow: 0 24px 60px -32px rgba(38, 49, 77, 0.35);
   container-type: inline-size;
+}
+
+html.fit, html.fit body { height: 100%; overflow: hidden; }
+html.fit body { padding: 0; }
+html.fit .card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%) scale(var(--fit, 1));
 }
 
 .content {
@@ -41,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 11cqw 8cqw 10cqw;
+  padding: 11cqw 6cqw 9cqw;
   text-align: center;
 }
 
@@ -78,12 +87,12 @@ h1 {
 }
 .rule { flex: 1; height: 2px; background: var(--tan); border-radius: 1px; }
 .heart { width: 26px; height: auto; flex: none; fill: var(--pink); opacity: 0.9; }
-.divider-wide  { width: 74%; margin-top: 5cqw; }
-.divider-plain { width: 64%; margin-top: 3cqw; }
-.divider-short { width: 42%; margin-top: 3.5cqw; }
+.divider-wide  { width: 84%; margin-top: 4cqw; }
+.divider-plain { width: 72%; margin-top: 3cqw; }
+.divider-short { width: 48%; margin-top: 3cqw; }
 
 /* Clothes */
-.clothes { width: 74%; min-width: 250px; height: auto; margin-top: -0.5cqw; }
+.clothes { width: 84%; height: auto; margin-top: -0.5cqw; }
 
 /* Details */
 .details { margin-top: 5cqw; display: flex; flex-direction: column; gap: 0.6cqw; line-height: 1.25; }
@@ -103,7 +112,7 @@ h1 {
 .rsvp-by { font-size: clamp(18px, 4.2cqw, 28px); }
 
 /* Countdown + buttons */
-.extras { margin-top: 6cqw; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.extras { margin-top: 4.5cqw; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .countdown {
   font-style: italic;
   font-size: clamp(18px, 3.6cqw, 24px);
@@ -222,12 +231,4 @@ h1 {
   }
   .intro, .divider, .clothes, .details, .rsvp, .extras { opacity: 1; }
   .word { clip-path: none; }
-}
-
-@media (max-width: 480px) {
-  body { padding: 16px; }
-  .content { padding: 14cqw 6cqw 12cqw; }
-  .divider-wide, .clothes { width: 88%; }
-  .divider-plain { width: 76%; }
-  .divider-short { width: 52%; }
 }
