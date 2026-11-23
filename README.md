@@ -9,10 +9,10 @@ It's a static site with no build step, served by GitHub Pages from the `main` br
 | File | What it is |
 | --- | --- |
 | `index.html` | The invitation |
-| `style.css` | The look and the animations: neutral boho, Cormorant Garamond + Great Vibes |
+| `style.css` | The look and the animations: pink and blue on cream, Cormorant Garamond + Great Vibes |
 | `script.js` | The "N days to go" countdown |
 | `invite.ics` | The calendar file for the "Add to calendar" button (5:00–8:00 PM, Manila time) |
-| `favicon.svg` | The balloon icon in the browser tab |
+| `favicon.svg` | The heart icon in the browser tab |
 
 ## Updating the site
 
